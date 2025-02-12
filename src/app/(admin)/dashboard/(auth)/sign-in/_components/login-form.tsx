@@ -15,6 +15,8 @@ import { Label } from "@/components/ui/label";
 import { SignIn } from "../lib/action";
 import { useFormState, useFormStatus } from "react-dom";
 import { ActionResult } from "@/types";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
 
 const initialState: ActionResult = {
   error: "",
@@ -47,6 +49,14 @@ export default function FormSignIn({
         <CardContent>
           <form action={formAction}>
             <div className="flex flex-col gap-6">
+              {state.error !== "" && (
+                <Alert variant="destructive">
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertTitle>Error</AlertTitle>
+                  <AlertDescription>{state.error}</AlertDescription>
+                </Alert>
+              )}
+
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
